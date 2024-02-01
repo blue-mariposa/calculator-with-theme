@@ -2,31 +2,40 @@
 Fonts
 **********/
 @font-face {
-    font-family: "Inter";
-    src: url(../fonts/Inter-Regular.ttf); 
+    font-family: "League-Spartan";
+    font-weight: 400;
+    src: url(../fonts/LeagueSpartan-Regular.woff2) format("woff2"),
+        url(../fonts/LeagueSpartan-Regular.woff) format("woff"); 
 }
 
 @font-face {
-    font-family: "Inter-Bold";
-    src: url(../fonts/Inter-Bold.ttf);
+    font-family: "League-Spartan";
+    font-weight: 700;
+    src: url(../fonts/LeagueSpartan-Bold.woff2) format("woff2"),
+        url(../fonts/LeagueSpartan-Bold.woff) format("woff"); 
 }
 
 @font-face {
-    font-family: "Inter-Black";
-    src: url(../fonts/Inter-Black.ttf);
+    font-family: "League-Spartan";
+    font-weight: 900;
+    src: url(../fonts/LeagueSpartan-ExtraBold.woff2) format("woff2"),
+        url(../fonts/LeagueSpartan-ExtraBold.woff) format("woff"); 
 }
 
 /************************
 Reset browser defaults
 *************************/
+
+
 *,
 *::after,
 *::before {
     box-sizing: border-box;
+    border: none;
     margin: 0;
     padding: 0;
-    /* font-weight: 400; */
-    font-family: Inter;
+    font-family: "League-Spartan", sans-serif ;
+    font-weight: 700;
 }
 
 li{
@@ -39,6 +48,8 @@ body{
     justify-content: center;
     align-items: center;
     height: 100vh;
+    background-color: hsl(222, 26%, 31%);
+    color: hsl(0, 0%, 100%);
 }
 
 /* Wrapper */
@@ -46,7 +57,7 @@ body{
     width: 350px;
     max-width: 350px;
     max-height: 98%;
-    background-color: grey;
+    /* background-color: grey; */
 }
 
 /* header */
@@ -58,16 +69,16 @@ body{
 }
 
 .logo p {
-    font-family: Inter-black;
     font-size: 1.5rem;
 }
 
 .themes{
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
     width: 120px;
     display: flex;
     justify-content: space-between;
     align-items: flex-end;
+    font-size: .8rem;
 }
 
 .themes > p{
@@ -75,17 +86,34 @@ body{
 }
 
 .theme-switch{
+    width: 60px;
     justify-self: flex-end;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    cursor: pointer;
+    position: relative;
+}
+
+input[type="radio"]{
+    opacity: 0;
+    position: absolute;
+    top: 25px;
+    background: none;
+    outline: none;
     cursor: pointer;
 }
 
-.theme-num{
-    width: 60px;
-    display: flex;
-    justify-content: space-evenly;
-    /* background-color: aqua; */
+input#theme-two{
+    margin-left: 20px;
+}
+
+input#theme-three{
+    margin-left: 40px;
+}
+
+label{
+    cursor: pointer;
 }
 
 .theme-switch-bg{
@@ -93,7 +121,7 @@ body{
     height: 1.5rem;
     border-radius: 1rem;
     margin-top: .2rem;
-    background-color: black;
+    background-color: hsl(223, 31%, 20%);
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -102,9 +130,19 @@ body{
 .theme-switch-btn{
     width: 28%;
     height: 65%;
-    background-color: brown;
+    background-color: hsl(6, 63%, 50%);
     border-radius: 50%;
     margin-left: .2rem;
+    transition: all 40ms ease-in;
+    /* display: none; */
+}
+
+input#theme-two:checked ~ .theme-switch-bg .theme-switch-btn{
+    margin-left: 20px;
+}
+
+input#theme-three:checked ~ .theme-switch-bg .theme-switch-btn{
+    margin-left: 40px;
 }
 
 /* display */
@@ -112,28 +150,219 @@ body{
     width: 100%;
     overflow: hidden;
     height: 100px;
-    background-color: aquamarine;
+    background-color: hsl(224, 36%, 15%);
     padding: 2rem 1rem;
     margin-top: 2rem;
-    border-radius: .8rem;
+    border-radius: .5rem;
     text-align: right;
-    font-size: 2rem;
+    font-size: 32px;
     font-weight: 800;
+}
+
+.display p{
+    overflow: auto;
 }
 
 .calc-btns{
     margin-top: 2rem;
-    background-color: black;
+    background-color: hsl(223, 31%, 20%);
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: .6rem;
-    padding: 1rem;
+    padding: 1.1rem;
     cursor: pointer;
-    /* text-transform: uppercase; */
+    text-align: center;
+    border-radius: .5rem;
 }
 
+button{
+    color: hsl(221, 14%, 31%);
+    font-size: 32px;
+    background-color: hsl(30, 25%, 89%);
+    border-bottom: .2rem solid hsl(28, 16%, 65%);
+    border-radius: .4rem;
+    padding: .4rem;
+    /* max-width: 80px; */
+    min-height: 55.8px;
+    cursor: pointer;
+}
 
+#reset-btn{
+    grid-column: 1 / 3;
+    min-width: 80px;
+    /* min-height: 55.8px; */
+}
+
+#eval-btn{
+    /* min-width: 80px; */
+    grid-column: 3 / 5;
+    background-color: hsl(6, 63%, 50%);
+    border-bottom-color: hsl(6, 70%, 34%);
+    color: hsl(0, 0%, 100%);
+}
+
+#del-btn, #reset-btn{
+    border-bottom-color: hsl(224, 28%, 35%);
+    background-color: hsl(225, 21%, 49%);
+    color: hsl(0, 0%, 100%);
+}
+
+button:hover,
+button:active,
+.theme-two button:hover,
+.theme-two button:active{
+    background-color: hsl(0, 0%, 100%);
+}
+
+#del-btn:hover, 
+#reset-btn:hover,
+#del-btn:active, 
+#reset-btn:active{
+    background-color: hsl(225, 21%, 69%);
+}
+
+#eval-btn:hover,
+#eval-btn:active{
+    background-color: hsl(6, 63%, 65%);
+}
+
+.error{
+    font-size: 1.2rem;
+    color: hsl(6, 70%, 34%);
+}
 
 /* Attribution */
-.attribution { font-size: 11px; text-align: center; }
-.attribution a { color: hsl(228, 45%, 44%); }
+.attribution { 
+    font-size: 12px; 
+    text-align: center; 
+    margin-top: 1rem;
+
+}
+.attribution a { color: hsl(172, 100%, 50%); }
+
+.attribution a:hover,
+.attribution a:active { color: hsl(172, 97%, 35%); }
+
+
+/* Theme two */
+.theme-two{
+    background-color: hsl(0, 0%, 90%);
+    color: hsl(60, 10%, 19%);
+}
+
+.theme-two .theme-switch-bg{
+    background-color: hsl(0, 5%, 81%);
+}
+
+.theme-two .theme-switch-btn {
+    background-color: hsl(25, 98%, 40%);
+}
+
+.theme-two .calc-btns{
+    background-color: hsl(0, 5%, 81%);
+}
+
+.theme-two .display{
+    background-color:  hsl(0, 0%, 93%);
+}
+
+.theme-two button{
+    background-color: hsl(45, 7%, 89%);
+    border-bottom-color: hsl(35, 11%, 61%);
+}
+
+.theme-two #eval-btn{
+    background-color: hsl(25, 98%, 40%);
+    border-bottom-color: hsl(25, 99%, 27%);
+}
+
+.theme-two #del-btn, .theme-two #reset-btn{
+    border-bottom-color: hsl(185, 58%, 25%);
+    background-color: hsl(185, 42%, 37%);
+}
+
+.theme-two #del-btn:hover, 
+.theme-two #reset-btn:hover,
+.theme-two #del-btn:active, 
+.theme-two #reset-btn:active{
+    background-color: hsl(185, 42%, 57%);
+}
+
+.theme-two #eval-btn:hover,
+.theme-two #eval-btn:active{
+    background-color: hsl(25, 98%, 60%);
+}
+
+.theme-two .attribution a { 
+    color: hsl(25, 98%, 40%); 
+}
+
+.theme-two .attribution a:hover,
+.theme-two .attribution a:active { 
+    color: hsl(25, 100%, 50%); 
+}
+
+/* Theme three */
+.theme-three{
+    background-color: hsl(268, 75%, 9%);
+    color: hsl(52, 100%, 62%);
+}
+
+.theme-three .theme-switch-bg{
+    background-color: hsl(268, 71%, 12%);
+}
+
+.theme-three .theme-switch-btn {
+    background-color: hsl(176, 100%, 44%);
+}
+
+.theme-three .calc-btns{
+    background-color: hsl(268, 71%, 12%);
+}
+
+.theme-three .display{
+    background-color:  hsl(268, 71%, 12%);
+}
+
+.theme-three button{
+    background-color: hsl(281, 89%, 26%);
+    border-bottom-color: hsl(285, 91%, 52%);
+    color: hsl(52, 100%, 62%);
+}
+
+.theme-three #eval-btn{
+    background-color: hsl(176, 100%, 44%);
+    border-bottom-color: hsl(177, 92%, 70%);
+}
+
+.theme-three #del-btn, .theme-three #reset-btn{
+    background-color: hsl(268, 47%, 21%);
+    border-bottom-color: hsl(290, 70%, 36%);
+}
+
+.theme-three button:hover,
+.theme-three button:active{
+    background-color: hsl(281, 89%, 46%);
+    /* background-color: hsl(281, 89%, 46%); */
+}
+
+.theme-three #del-btn:hover,
+.theme-three #reset-btn:hover,
+.theme-three #del-btn:active,
+.theme-three #reset-btn:active{
+    background-color: hsl(268, 47%, 41%);
+}
+
+.theme-three #eval-btn:hover,
+.theme-three #eval-btn:active{
+    background-color: hsl(176, 100%, 64%);
+}
+
+.theme-three .attribution a { 
+    color: hsl(176, 100%, 44%); 
+}
+
+.theme-three .attribution a:hover,
+.theme-two .attribution a:active { 
+    color: hsl(176, 95%, 33%); 
+}
